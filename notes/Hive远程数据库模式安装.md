@@ -29,7 +29,7 @@
 			</property>
 			<property>
 				<name>javax.jdo.option.ConnectionURL</name>
-				<value>jdbc:mysql://node01:3306/hive?reateDatabaseIfNotExist=true</value>
+				<value>jdbc:mysql://node01:3306/hive?createDatabaseIfNotExist=true</value>
 			</property>
 			<property>
 				<name>javax.jdo.option.ConnectionDriverName</name>
