@@ -10,7 +10,7 @@
 
 ​		一般情况下，我们在学习的时候直接使用hive –service metastore的方式启动服务端，使用hive的方式直接访问登录客户端，除了这种方式之外，hive提供了hiveserver2的服务端启动方式，提供了beeline和jdbc的支持，并且官网也提出，一般在生产环境中，使用hiveserver2的方式比较多，如图：
 
-![]([https://github.com/msbbigdata/hive/blob/master/images/hiveserver2.png])
+![hiveserver2](https://github.com/msbbigdata/hive/blob/master/images/hiveserver2.png)
 
 使用hiveserver2的优点如下：
 
@@ -26,7 +26,7 @@
 
 如何进行搭建，参照之前hadoop的HA，使用zookeeper完成HA
 
-![]([https://github.com/msbbigdata/hive/blob/master/images/hive%20HA.png])
+![hive HA](https://github.com/msbbigdata/hive/blob/master/images/hive%20HA.png)
 
 **1、环境如下:**	
 

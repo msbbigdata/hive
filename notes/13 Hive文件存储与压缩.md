@@ -80,7 +80,7 @@ hive (default)> select count(*) from aaaa;
 
 ##### 1) 列式存储和行式存储
 
-![]([https://github.com/msbbigdata/hive/blob/master/images/%E8%A1%8C%E5%BC%8F%E5%AD%98%E5%82%A8%E4%B8%8E%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8.png])
+![行式存储与列式存储](https://github.com/msbbigdata/hive/blob/master/images/%E8%A1%8C%E5%BC%8F%E5%AD%98%E5%82%A8%E4%B8%8E%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8.png)
 
 上图左边为逻辑表，右边第一个为行式存储，第二个为列式存储。
 
@@ -102,7 +102,7 @@ ORC和PARQUET是基于列式存储的。
 
 ​		可以看到每个Orc文件由1个或多个stripe组成，每个stripe250MB大小，这个Stripe实际相当于RowGroup概念，不过大小由4MB->250MB，这样应该能提升顺序读的吞吐率。每个Stripe里有三部分组成，分别是Index Data,Row Data,Stripe Footer：
 
-![]([https://github.com/msbbigdata/hive/blob/master/images/orc%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png])
+![orc文件格式](https://github.com/msbbigdata/hive/blob/master/images/orc%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png)
 
    		1）Index Data：一个轻量级的index，默认是每隔1W行做一个索引。这里做的索引应该只是记录某行的各字段在Row Data中的offset。
 
@@ -120,7 +120,7 @@ ORC和PARQUET是基于列式存储的。
 
 ​		通常情况下，在存储Parquet数据的时候会按照Block大小设置行组的大小，由于一般情况下每一个Mapper任务处理数据的最小单位是一个Block，这样可以把每一个行组由一个Mapper任务处理，增大任务执行并行度。Parquet文件的格式如下图所示。
 
-![]([https://github.com/msbbigdata/hive/blob/master/images/parquet%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png])
+![parquet文件格式](https://github.com/msbbigdata/hive/blob/master/images/parquet%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png)
 
 ​		上图展示了一个Parquet文件的内容，一个文件中可以存储多个行组，文件的首位都是该文件的Magic Code，用于校验它是否是一个Parquet文件，Footer length记录了文件元数据的大小，通过该值和文件长度可以计算出元数据的偏移量，文件的元数据中包括每一个行组的元数据信息和该文件存储数据的Schema信息。除了文件中每一个行组的元数据，每一页的开始都会存储该页的元数据，在Parquet中，有三种类型的页：数据页、字典页和索引页。数据页用于存储当前行组中该列的值，字典页存储该列值的编码字典，每一个列块中最多包含一个字典页，索引页用来存储当前行组下该列的索引，目前Parquet中还不支持索引页。
 
