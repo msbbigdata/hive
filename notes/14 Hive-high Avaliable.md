@@ -148,6 +148,27 @@
 
 2）jdbc
 
-![img](file:///C:\Users\seanzhou\AppData\Local\Temp\ksohtml10432\wps10.png) 
+```java
+public class HiveJdbcClient2 {
+
+	private static String driverName = "org.apache.hive.jdbc.HiveDriver";
+
+	public static void main(String[] args) throws SQLException {
+		try {
+			Class.forName(driverName);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		Connection conn = DriverManager.getConnection("jdbc:hive2://node01,node02,node03/default;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2_zk", "root", "");
+		Statement stmt = conn.createStatement();
+		String sql = "select * from tbl";
+		ResultSet res = stmt.executeQuery(sql);
+		while (res.next()) {
+			System.out.println(res.getString(1));
+		}
+	}
+}
+```
 
 ​	
